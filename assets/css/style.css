@@ -583,53 +583,42 @@ section {
 
 /* # Skills */
 
-/* allow tooltips to overflow */
-#skills,
-#skills .skills-stack,
-#skills .skill-category-card,
-#skills .icon-list {
-  overflow: visible;
-}
-
-/* grid of categories */
-.skills-stack {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-/* glass card */
+/* ----- Card ----- */
 .skill-category-card {
   position: relative;
   padding: 20px;
   border-radius: 18px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-brd);
-  -webkit-backdrop-filter: blur(14px) saturate(150%);
-  backdrop-filter: blur(14px) saturate(150%);
-  color: var(--text-ink);
-  box-shadow: 0 10px 30px rgba(69, 80, 91, .12);
+  background: #fff;
+  border: 1px solid rgba(69, 80, 91, 0.16);
+  box-shadow: 0 6px 18px rgba(69, 80, 91, 0.12);
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  margin-bottom: 28px;
+  /* ⬅️ This adds vertical space */
+}
+
+/* Optional: last card no extra bottom space */
+.skill-category-card:last-child {
+  margin-bottom: 0;
 }
 
 .skill-category-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(69, 80, 91, .18);
-  border-color: rgba(255, 255, 255, .65);
+  box-shadow: 0 12px 28px rgba(69, 80, 91, 0.2);
+  border-color: rgba(69, 80, 91, 0.3);
 }
 
 .sc-header {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .sc-header h4 {
   margin: 0;
-  font-size: 1.06rem;
-  font-weight: 800;
-  color: var(--text-ink);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #13213a;
 }
 
 .sc-icon {
@@ -637,126 +626,124 @@ section {
   color: #2d6cff;
 }
 
-/* icon grid */
+/* ----- Icon list ----- */
 .icon-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  list-style: none;
+  margin: 0;
   padding: 0;
-  margin: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 12px;
+  justify-items: center;
+  align-items: center;
 }
 
-/* icon tile */
+/* ----- Icon tile ----- */
 .icon-list .ico {
-  position: relative;
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   border-radius: 14px;
-  display: block;
-  background: rgba(255, 255, 255, .55);
-  border: 1px solid rgba(69, 80, 91, .18);
-  box-shadow: 0 6px 18px rgba(69, 80, 91, .15);
-  -webkit-backdrop-filter: blur(8px) saturate(140%);
-  backdrop-filter: blur(8px) saturate(140%);
+  background: #fff;
+  border: 1px solid rgba(69, 80, 91, .16);
+  box-shadow: 0 6px 18px rgba(69, 80, 91, .12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-  cursor: default;
-  z-index: 1;
 }
 
-.icon-list .ico:hover,
-.icon-list .ico:focus-visible {
+.icon-list .ico:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(69, 80, 91, .22);
-  border-color: rgba(69, 80, 91, .30);
-  outline: none;
-  z-index: 5;
+  box-shadow: 0 10px 24px rgba(69, 80, 91, .2);
+  border-color: rgba(69, 80, 91, .3);
 }
 
-/* HARD center any child (Iconify, Line Awesome, or <img>) */
-.icon-list .ico>iconify-icon,
+/* ----- Glyph inside tile (Devicon, Boxicons, SVG, img) ----- */
 .icon-list .ico>i,
-.icon-list .ico>img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
-  line-height: 0;
-}
-
-/* sizes (tweak to taste) */
-.icon-list .ico>iconify-icon {
-  width: 32px;
-  height: 32px;
-}
-
-/* Iconify */
-.icon-list .ico>i {
-  font-size: 32px;
-}
-
-/* Line Awesome */
-.icon-list .ico>img {
-  width: 32px;
-  height: 32px;
+.icon-list .ico>iconify-icon,
+.icon-list .ico>img,
+.icon-list .ico>svg {
+  font-size: 34px;
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
   display: block;
 }
 
-/* if any */
+/* Tablets */
+@media (max-width: 768px) {
+  .icon-list {
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 icons per row */
+    gap: 10px;
+  }
 
-/* tooltip above tile */
+  .icon-list .ico {
+    width: 64px;
+    height: 64px;
+  }
+
+  .icon-list .ico>i,
+  .icon-list .ico>iconify-icon,
+  .icon-list .ico>img {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .icon-list {
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 icons per row */
+    gap: 8px;
+  }
+
+  .icon-list .ico {
+    width: 60px;
+    height: 60px;
+  }
+
+  .icon-list .ico>i,
+  .icon-list .ico>iconify-icon,
+  .icon-list .ico>img {
+    font-size: 26px;
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* Tooltip for icons */
 .icon-list .ico::after {
   content: attr(data-label);
   position: absolute;
+  bottom: calc(100% + 8px);
+  /* show above the icon */
   left: 50%;
-  top: -10px;
-  bottom: auto;
-  transform: translate(-50%, -8px) scale(.98);
-  padding: 6px 10px;
-  border-radius: 10px;
-  font-size: .80rem;
-  font-weight: 700;
+  transform: translateX(-50%);
   white-space: nowrap;
+
+  background: rgba(0, 0, 0, 0.85);
   color: #fff;
-  background: rgba(16, 24, 40, .9);
-  box-shadow: 0 4px 14px rgba(16, 24, 40, .25);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 6px;
+
   opacity: 0;
   visibility: hidden;
-  transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
+  transition: opacity 0.2s ease, transform 0.2s ease;
   pointer-events: none;
-  z-index: 6;
-  max-width: 240px;
+  z-index: 10;
 }
 
+/* Show on hover */
 .icon-list .ico:hover::after,
 .icon-list .ico:focus-visible::after {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, -12px) scale(1);
-}
-
-/* responsive */
-@media (max-width:992px) {
-  .skills-stack {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width:640px) {
-  .skills-stack {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* reduced motion */
-@media (prefers-reduced-motion: reduce) {
-
-  .icon-list .ico,
-  .icon-list .ico::after,
-  .skill-category-card {
-    transition: none !important;
-  }
+  transform: translateX(-50%) translateY(-4px);
 }
 
 
@@ -1139,7 +1126,7 @@ section {
 }
 
 
-/* #Contact */ 
+/* #Contact */
 /* CONTACT CARD STYLING */
 .contact-card {
   display: flex;
@@ -1150,20 +1137,22 @@ section {
   background: #fff;
   border: 1px solid #e9eef3;
   border-radius: 16px;
-  padding: 45px 20px;       /* More padding */
+  padding: 45px 20px;
+  /* More padding */
   text-align: center;
   text-decoration: none;
   height: 100%;
-  box-shadow: 0 2px 8px rgba(0,0,0,.04);
-  transition: all 0.3s ease; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+  transition: all 0.3s ease;
 }
 
-.contact-cards{
+.contact-cards {
   margin-bottom: 40px;
 }
+
 .contact-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .08);
   border-color: #d9e6f6;
 }
 
